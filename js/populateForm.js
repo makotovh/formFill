@@ -15,7 +15,7 @@
  * Usage:
  * --------------------------------------------------------------------------
  * 
- *	$('form#formUser').fill(user, "user");
+ *	$('form#formUser').fill(user);
  *  
  *  <form id="formUser">
  *  	<label>Name:</label>

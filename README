@@ -1,0 +1,26 @@
+/**
+ * jQuery Form Fill - http://makoto.blog.br/formFill
+ * --------------------------------------------------------------------------
+ *
+ * Licensed under The MIT License
+ * 
+ * @version     0.1
+ * @since       16.06.2010
+ * @author      Makoto Hashimoto
+ * @link        http://makoto.blog.br/formFill
+ * @twitter     http://twitter.com/makoto_vix
+ * @license     http://www.opensource.org/licenses/mit-license.php MIT 
+ * @package     jQuery Plugins
+ * 
+ * Usage:
+ * --------------------------------------------------------------------------
+ * 
+ *	$('form#formUser').fill(user);
+ *  
+ *  <form id="formUser">
+ *  	<label>Name:</label>
+ *  	<input type="text" name="user.name"/>
+ *  	<label>E-mail:</label>
+ *  	<input type="text" name="user.email"/>
+ *  </form>
+ */

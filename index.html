@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>jQuery Form Fill Plugin</title>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery.formFill.js"></script>
+
+		<style type="text/css">
+			a {
+				color: #EA9C00;
+				font: bold 10px verdana;
+				letter-spacing: .9px;
+				text-decoration: none;
+			}
+
+			a:hover {
+				color: #DC5;
+				font: bold 10px verdana;
+				letter-spacing: .9px;
+				text-decoration: underline;
+			}
+
+			div.description {
+				font: 10px verdana;
+				color: #555;
+				letter-spacing: .1px;
+				margin-bottom: 10px;
+				text-indent: 7px;
+				text-align: left;
+				width: 99%;
+			}
+
+			div#link {
+				font: 10px verdana;
+				color: #AB9927;
+				text-indent: 7px;
+			}
+
+			div.notice {
+				font: 9px verdana;
+				color: #777;
+				letter-spacing: .1px;
+				margin-bottom: 10px;
+				text-indent: 7px;
+				text-align: left;
+				width: 99%;
+			}
+
+			div.session {
+				font: bold 13px verdana;
+				border-bottom: 1px solid #EFEFEF;
+				color: #444;
+				letter-spacing: .7px;
+				margin-bottom: 10px;
+				margin-top: 24px;
+				text-align: left;
+				width: 99%;
+			}
+
+			div.source {
+				background: #F8F8FF;
+				border: 1px solid #EFEFEF;
+				border-left: 3px solid #CCC;
+				color: #444;
+				font: 12px monospace;
+				letter-spacing: .1px;
+				margin-bottom: 7px;
+				margin-top: 5px;
+				padding: 7px;
+				width: 99%;
+			}
+
+			div.titulo {
+				font: bold 17px verdana;
+				color: #269;
+				letter-spacing: .7px;
+				margin-bottom: 20px;
+				margin-top: 5px;
+				text-align: left;
+				width: 99%;
+			}
+		</style>
+
+		<script type="text/javascript">
+			$(function() {
+
+			   $("#btnExample1").click(function() {					
+					var user = {"name" : "Makoto Hashimoto",
+								"email" : "makoto@makoto.blog.br",
+								"phone" : {
+									"codeArea" : "+55",
+									"number" : "2755555555"
+								},
+								"gender" : "M"
+								};
+					$("#form1").fill(user);
+				});
+			});
+
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-16009543-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	</head>
+	<body>
+		<div class="titulo">jQuery Form Fill Plugin</div>
+
+		<div id="link">
+			| <a href="http://github.com/downloads/makotohashimoto/formFill/jquery.formFill.zip" target="_blank">Download</a> |
+			<a href="http://github.com/makotohashimoto/formFill" target="_blank">Github</a> |
+			<a href="http://makoto.blog.br/formFill/README" target="_blank">Readme</a> |
+		</div>
+
+		<div class="session">With default options:</div>
+		<div id="fixed"></div>
+		
+		<div id="divForm1">
+			<form id="form1">
+				<label>Nome:</label>
+				<input name="user.name" />
+				
+				<label>E-mail:</label>
+				<input name="user.email" />
+				
+				<label>Phone:</label>
+				<input name="user.phone.codeArea" size="3" maxlength="3" />
+				<input name="user.phone.number" size="11" maxlength="10" />
+				
+				<label>Gender:</label>
+				<select name="user.gender">
+					<option>--Select--</option>
+					<option value="F">Female</option>
+					<option value="M">Male</option>
+				</select>
+			</form>
+			
+			<input type="button" id="btnExample1" value="Fill" />
+		</div>
+
+		<div class="source">
+			$("#btnExample1").click(function() { <br />					
+			&nbsp;&nbsp;var user = {"name" : "Makoto Hashimoto",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;"email" : "makoto@makoto.blog.br",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;"phone" : {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"codeArea" : "+55",<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"number" : "2755555555"<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;"gender" : "M"<br />
+			&nbsp;&nbsp;};<br />
+			&nbsp;&nbsp;$("#form1").fill(user);<br />
+				});
+		</div>
+</html>

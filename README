@@ -15,7 +15,7 @@
  * Usage:
  * --------------------------------------------------------------------------
  * 
- *	$('form#formUser').fill(user);
+ *	$('form#formUser').fill({"name" : "Makoto Hashimoto", "email" : "makoto@makoto.blog.br"});
  *  
  *  <form id="formUser">
  *  	<label>Name:</label>

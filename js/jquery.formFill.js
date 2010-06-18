@@ -6,7 +6,7 @@
  * 
  * @version     0.1
  * @since       16.06.2010
- * @author      Makoto Vieira Hashimoto
+ * @author      Makoto Hashimoto
  * @link        http://makoto.blog.br/formFill
  * @twitter     http://twitter.com/makoto_vix
  * @license     http://www.opensource.org/licenses/mit-license.php MIT 
@@ -15,7 +15,7 @@
  * Usage:
  * --------------------------------------------------------------------------
  * 
- *	$('form#formUser').fill(user);
+ *	$('form#formUser').fill({"name" : "Makoto Hashimoto", "email" : "makoto@makoto.blog.br"});
  *  
  *  <form id="formUser">
  *  	<label>Name:</label>

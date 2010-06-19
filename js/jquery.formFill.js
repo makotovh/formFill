@@ -90,7 +90,6 @@
 							});
 						break;
 						case "checkbox":
-							//alert($(item).attr("name") +  value);
 							if ($.isArray(value)) {
 								$.each(value, function(i, arrayItem) {
 									arrayItemValue = eval("arrayItem." + arrayAtribute);
@@ -118,7 +117,7 @@
 	};
 	
 	$.fn.fill.defaults = {
-		styleElementName: 'object',	// object | array | none
+		styleElementName: 'object',	// object | none
 		debug: false
 	};
 	

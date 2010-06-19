@@ -35,16 +35,30 @@
 		$this.find("*").each(function(i, item){
 			if ($(item).is("input") || $(item).is("select") || $(item).is("textarea")) {
 				try {
-					
 					var objName;
-					if (options.styleElementName == "object") {
-						objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.');
-					} else if (options.type == "none") {
-						objName = 'obj.' + $(item).attr("name");
-					}
+					var arrayAtribute;
+					try {
 						
-					
-					var value = eval(objName);
+						if (options.styleElementName == "object") {
+							// Verificando se é um array
+							if ($(item).attr("name").match(/\[[0-9]*\]/i)) {
+								objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.').replace(/\[[0-9]*\].*/i, "");
+								
+								arrayAtribute = $(item).attr("name").match(/\[[0-9]*\]\.[a-z0-9]*/i) + "";
+								arrayAtribute = arrayAtribute.replace(/\[[0-9]*\]\./i, "");
+							} else {
+								objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.');
+							}
+						} else if (options.type == "none") {
+							objName = 'obj.' + $(item).attr("name");
+						}
+						
+						var value = eval(objName);
+					} catch(e) {
+						if (options.debug) {
+							debug(e.message);
+						}
+					}					
 					
 					switch ($(item).attr("type")) {
 						case "hidden":
@@ -67,6 +81,28 @@
 						
 						case "select-one":						
 							$(item).val(value).change();
+						break;
+						case "radio":
+							$(item).each(function (i, radio) {
+								if ($(radio).val() == value) {
+									$(radio).attr("checked", "checked");
+								}
+							});
+						break;
+						case "checkbox":
+							//alert($(item).attr("name") +  value);
+							if ($.isArray(value)) {
+								$.each(value, function(i, arrayItem) {
+									arrayItemValue = eval("arrayItem." + arrayAtribute);
+									if ($(item).val() == arrayItemValue) {
+										$(item).attr("checked", "checked");
+									}
+								}); 
+							} else {
+								if ($(item).val() == value) {
+									$(item).attr("checked", "checked");
+								}
+							}						
 						break;
 					}
 				} catch(e) {

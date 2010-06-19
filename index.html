@@ -94,9 +94,14 @@
 									"codeArea" : "+55",
 									"number" : "2755555555"
 								},
-								"gender" : "M"
-								};
-					$("#form1").fill(user);
+								"gender" : "M",
+								"admin" : "Y",
+								"rules" : [
+									{"id" : "1", "name": "Admin"},
+									{"id" : "3", "name": "Developer"}
+								]								
+					};
+					$("#form1").fill(user, {debug : true});
 				});
 			});
 
@@ -127,23 +132,43 @@
 			<form id="form1">
 				<label>Nome:</label>
 				<input name="user.name" />
+				<br /><br />
 				
 				<label>E-mail:</label>
 				<input name="user.email" />
+				<br /><br />
 				
 				<label>Phone:</label>
 				<input name="user.phone.codeArea" size="3" maxlength="3" />
 				<input name="user.phone.number" size="11" maxlength="10" />
+				<br /><br />
 				
 				<label>Gender:</label>
 				<select name="user.gender">
-					<option>--Select--</option>
+					<option>--select--</option>
 					<option value="F">Female</option>
 					<option value="M">Male</option>
 				</select>
+				<br /><br />
+				
+				<label>Is Administrator?</label>
+				<!--input type="checkbox" name="user.admin" value="Y" -->
+				
+				<input type="radio" name="user.admin" value="Y"> Yes
+				<input type="radio" name="user.admin" value="N"> No
+				<br /><br />
+				
+				<label>Rules:</label>
+				
+				<input type="checkbox" name="user.rules[0].id" value="1" /> Admin<br />
+				<input type="checkbox" name="user.rules[1].id" value="2" /> User<br />
+				<input type="checkbox" name="user.rules[2].id" value="3" /> Developer
+				<br /><br />
+				
+				<input type="button" id="btnExample1" value="Fill" />
+				<input type="reset" value="Reset" />
 			</form>
 			
-			<input type="button" id="btnExample1" value="Fill" />
 		</div>
 
 		<div class="source">

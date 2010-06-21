@@ -140,11 +140,40 @@
 			| <a href="http://github.com/downloads/makotohashimoto/formFill/jquery.formFill.zip" target="_blank">Download</a> |
 			<a href="http://github.com/makotohashimoto/formFill" target="_blank">Github</a> |
 		</div>
-
-		<div class="session">With default options:</div>
+		
+		
+		<div class="session">Overview</div>
 		<div id="fixed"></div>
 		
-		<div id="divForm1">
+		<div class="description">
+			The"jQuery Form Fill" fills forms from JSON objects.
+			<ul>
+				<li>
+					Fill all kinds of elements html:
+					<ul>
+						<li>text</li>
+						<li>password</li>
+						<li>hidden</li>
+						<li>textarea</li>
+						<li>checkbox</li>
+						<li>radio</li>
+						<li>select</li>
+					</ul>
+				</li>
+				<li>
+					Fills fields with jQueryUI Datepicker.
+					<ul>
+						<li>Date in string format. Ex: "MM/DD/YYYY"</li>
+						<li>Date in milliseconds</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+
+		<div class="session">Quick Start Guide</div>
+		<div id="fixed"></div>
+		
+		<div id="divForm1" class="description">
 			<form id="form1">
 				<label>Nome:</label>
 				<input type="text" name="user.name" />
@@ -197,14 +226,15 @@
 
 		<div class="source">
 			$("#btnExample1").click(function() { <br />					
-			&nbsp;&nbsp;var user = {"name" : "Makoto Hashimoto",<br />
+			&nbsp;&nbsp;var user = {<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Makoto Hashimoto",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"email" : "makoto@makoto.blog.br",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"phone" : {<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"codeArea" : "+55",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"number" : "2755555555"<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;},<br />
-			&nbsp;&nbsp;&nbsp;&nbsp;"date1": "03/30/1981",    // (mm/dd/yyyy)
-			&nbsp;&nbsp;&nbsp;&nbsp;"date2": "354769200000",  // 1981-03-30 in milliseconds
+			&nbsp;&nbsp;&nbsp;&nbsp;"date1": "03/30/1981",    // (mm/dd/yyyy)<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;"date2": "354769200000",  // 1981-03-30 in milliseconds<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"gender" : "M"<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"admin" : "Y",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"rules" : [<br />

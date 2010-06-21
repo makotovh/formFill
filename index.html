@@ -2,10 +2,13 @@
 
 <html>
 	<head>
+	
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>jQuery Form Fill Plugin</title>
 
+		<link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.2.custom.css" type="text/css" media="screen" title="no title" charset="utf-8">
 		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/jquery-ui.js"></script>
 		<script type="text/javascript" src="js/jquery.formFill.js"></script>
 
 		<style type="text/css">
@@ -86,14 +89,28 @@
 
 		<script type="text/javascript">
 			$(function() {
+				
+				$("#date1").datepicker({
+				       dateFormat: 'mm/dd/yy',
+				       changeMonth: true,
+				       changeYear: true
+				});
+				
+				$("#date2").datepicker({
+				       dateFormat: 'mm/dd/yy',
+				       changeMonth: true,
+				       changeYear: true
+				});
 
-			   $("#btnExample1").click(function() {					
+			   	$("#btnExample1").click(function() {					
 					var user = {"name" : "Makoto Hashimoto",
 								"email" : "makoto@makoto.blog.br",
 								"phone" : {
 									"codeArea" : "+55",
 									"number" : "2755555555"
 								},
+								"date1": "03/30/1981",
+								"date2": "354769200000",  // 1981-03-30 in milliseconds 
 								"gender" : "M",
 								"admin" : "Y",
 								"rules" : [
@@ -130,16 +147,24 @@
 		<div id="divForm1">
 			<form id="form1">
 				<label>Nome:</label>
-				<input name="user.name" />
+				<input type="text" name="user.name" />
 				<br /><br />
 				
 				<label>E-mail:</label>
-				<input name="user.email" />
+				<input type="text" name="user.email" />
 				<br /><br />
 				
 				<label>Phone:</label>
-				<input name="user.phone.codeArea" size="3" maxlength="3" />
-				<input name="user.phone.number" size="11" maxlength="10" />
+				<input type="text" name="user.phone.codeArea" size="3" maxlength="3" />
+				<input type="text" name="user.phone.number" size="11" maxlength="10" />
+				<br /><br />
+				
+				<label>Date:</label>
+				<input type="text" name="user.date1" id="date1" /> from string (mm/dd/yyyy, mm-dd-yyyy, yyyy-mm-dd or yyyy/mm/dd)
+				<br /><br />
+				
+				<label>Date 2:</label>
+				<input type="text" name="user.date2" id="date2"/> from milliseconds
 				<br /><br />
 				
 				<label>Gender:</label>
@@ -178,6 +203,8 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"codeArea" : "+55",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"number" : "2755555555"<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+			&nbsp;&nbsp;&nbsp;&nbsp;"date1": "03/30/1981",    // (mm/dd/yyyy)
+			&nbsp;&nbsp;&nbsp;&nbsp;"date2": "354769200000",  // 1981-03-30 in milliseconds
 			&nbsp;&nbsp;&nbsp;&nbsp;"gender" : "M"<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"admin" : "Y",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"rules" : [<br />

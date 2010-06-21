@@ -71,7 +71,11 @@
 							var classe = $(item).attr('class');
 							
 							if (classe && classe.search("hasDatepicker") != -1) {
-								$(item).datepicker('setDate', new Date(parseInt(value)));
+								if (value.match(/^[-+]*[0-9]*$/)) {
+									$(item).datepicker('setDate', new Date(parseInt(value)));
+								} else {
+									$(item).datepicker('setDate', new Date(Date.parse(value)));
+								}
 							} else if ($(item).attr("alt") == "double") {
 								$(item).val(value.toFixed(2));
 							} else {

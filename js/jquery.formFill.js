@@ -49,7 +49,7 @@
 							} else {
 								objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.');
 							}
-						} else if (options.type == "none") {
+						} else if (options.styleElementName == "none") {
 							objName = 'obj.' + $(item).attr("name");
 						}
 						

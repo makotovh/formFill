@@ -28,7 +28,7 @@
 	
 	$.fn.fill = function (obj, settings) {
 		
-		options = $.extend({}, $.fn.fill.defaults, settings);
+		options = $.extend({}, $.fn.defaults, settings);
 		
 		$this = $(this);
 		
@@ -83,8 +83,10 @@
 							}
 						break;
 						
-						case "select-one":						
-							$(item).val(value).change();
+						case "select-one":
+							if (value) {
+								$(item).val(value);
+							}
 						break;
 						case "radio":
 							$(item).each(function (i, radio) {
@@ -107,6 +109,7 @@
 								}
 							}						
 						break;
+						executeEvents(item);
 					}
 				} catch(e) {
 					if (options.debug) {
@@ -120,10 +123,23 @@
 		
 	};
 	
-	$.fn.fill.defaults = {
+	$.fn.defaults = {
 		styleElementName: 'object',	// object | none
-		debug: false
+		debug: false,
+		elementsExecuteEvents: ['checkbox', 'radio', 'select-one']
 	};
+	
+	function executeEvents(element) {
+		if (jQuery.inArray($(element).attr('type'), $.fn.defaults.elementsExecuteEvents)) {
+			if ($(element).attr('onchange')) {
+				$(element).change();
+			}
+
+			if ($(element).attr('onclick')) {
+				$(element).click();
+			}
+		}	
+	}
 	
 	function debug(message) {                                                                                            // Throws error messages in the browser console.
         if (window.console && window.console.log) {

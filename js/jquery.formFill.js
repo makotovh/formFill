@@ -68,12 +68,11 @@
 						break;
 
 						case "text":
-							var classe = $(item).attr('class');
-							
-							if (classe && classe.search("hasDatepicker") != -1) {
-								if (value.match(/^[-+]*[0-9]*$/)) {
+							if ($(item).hasClass("hasDatepicker")) {
+								var re = /^[-+]*[0-9]*$/;
+								if (re.test(value)) {
 									$(item).datepicker('setDate', new Date(parseInt(value)));
-								} else {
+								} else if (value) {
 									$(item).datepicker('setDate', new Date(Date.parse(value)));
 								}
 							} else if ($(item).attr("alt") == "double") {

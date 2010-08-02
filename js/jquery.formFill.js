@@ -28,7 +28,7 @@
 	
 	$.fn.fill = function (obj, settings) {
 		
-		options = $.extend({}, $.fn.defaults, settings);
+		options = $.extend({}, $.fn.fill.defaults, settings);
 		
 		$this = $(this);
 		
@@ -54,61 +54,64 @@
 						}
 						
 						var value = eval(objName);
+						
 					} catch(e) {
 						if (options.debug) {
 							debug(e.message);
 						}
 					}					
 					
-					switch ($(item).attr("type")) {
-						case "hidden":
-						case "password":
-						case "textarea":
-							$(item).val(value);
-						break;
+					if (value != null) {
+						switch ($(item).attr("type")) {
+							case "hidden":
+							case "password":
+							case "textarea":
+								$(item).val(value);
+							break;
 
-						case "text":
-							if ($(item).hasClass("hasDatepicker")) {
-								var re = /^[-+]*[0-9]*$/;
-								if (re.test(value)) {
-									$(item).datepicker('setDate', new Date(parseInt(value)));
-								} else if (value) {
-									$(item).datepicker('setDate', new Date(Date.parse(value)));
+							case "text":
+								if ($(item).hasClass("hasDatepicker")) {
+									var re = /^[-+]*[0-9]*$/;
+									if (re.test(value)) {
+										$(item).datepicker('setDate', new Date(parseInt(value)));
+									} else if (value) {
+										$(item).datepicker('setDate', new Date(Date.parse(value)));
+									}
+								} else if ($(item).attr("alt") == "double") {
+									$(item).val(value.toFixed(2));
+								} else {
+									$(item).val(value);
 								}
-							} else if ($(item).attr("alt") == "double") {
-								$(item).val(value.toFixed(2));
-							} else {
-								$(item).val(value);
-							}
-						break;
-						
-						case "select-one":
-							if (value) {
-								$(item).val(value);
-							}
-						break;
-						case "radio":
-							$(item).each(function (i, radio) {
-								if ($(radio).val() == value) {
-									$(radio).attr("checked", "checked");
+							break;
+
+							case "select-one":
+								if (value) {
+									$(item).val(value);
 								}
-							});
-						break;
-						case "checkbox":
-							if ($.isArray(value)) {
-								$.each(value, function(i, arrayItem) {
-									arrayItemValue = eval("arrayItem." + arrayAtribute);
-									if ($(item).val() == arrayItemValue) {
+							break;
+							case "radio":
+								$(item).each(function (i, radio) {
+									if ($(radio).val() == value) {
+										$(radio).attr("checked", "checked");
+									}
+								});
+							break;
+							case "checkbox":
+								if ($.isArray(value)) {
+									$.each(value, function(i, arrayItem) {
+										arrayItemValue = eval("arrayItem." + arrayAtribute);
+										if ($(item).val() == arrayItemValue) {
+											$(item).attr("checked", "checked");
+										}
+									}); 
+								} else {
+									if ($(item).val() == value) {
 										$(item).attr("checked", "checked");
 									}
-								}); 
-							} else {
-								if ($(item).val() == value) {
-									$(item).attr("checked", "checked");
-								}
-							}						
-						break;
-						executeEvents(item);
+								}						
+							break;
+							executeEvents(item);
+						}
 					}
 				} catch(e) {
 					if (options.debug) {
@@ -122,14 +125,14 @@
 		
 	};
 	
-	$.fn.defaults = {
+	$.fn.fill.defaults = {
 		styleElementName: 'object',	// object | none
 		debug: false,
 		elementsExecuteEvents: ['checkbox', 'radio', 'select-one']
 	};
 	
 	function executeEvents(element) {
-		if (jQuery.inArray($(element).attr('type'), $.fn.defaults.elementsExecuteEvents)) {
+		if (jQuery.inArray($(element).attr('type'), $.fn.fill.defaults.elementsExecuteEvents)) {
 			if ($(element).attr('onchange')) {
 				$(element).change();
 			}

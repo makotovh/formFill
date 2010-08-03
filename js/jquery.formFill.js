@@ -80,7 +80,6 @@
 									} else if (value) {										
 										dateValue = $.datepicker.parseDate(options.dateFormat, value);
 									}
-									alert(dateValue);
 									$(item).datepicker('setDate', dateValue);							
 								} else if ($(item).attr("alt") == "double") {
 									$(item).val(value.toFixed(2));

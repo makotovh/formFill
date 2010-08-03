@@ -72,11 +72,16 @@
 							case "text":
 								if ($(item).hasClass("hasDatepicker")) {
 									var re = /^[-+]*[0-9]*$/;
+									var dateValue = null;
 									if (re.test(value)) {
-										$(item).datepicker('setDate', new Date(parseInt(value)));
-									} else if (value) {
-										$(item).datepicker('setDate', new Date(Date.parse(value)));
+										dateValue = new Date(parseInt(value));
+										var strDate = dateValue.getUTCFullYear() + '-' + (dateValue.getUTCMonth() + 1) + '-' + dateValue.getUTCDate();
+										dateValue = $.datepicker.parseDate('yy-mm-dd', strDate);
+									} else if (value) {										
+										dateValue = $.datepicker.parseDate(options.dateFormat, value);
 									}
+									alert(dateValue);
+									$(item).datepicker('setDate', dateValue);							
 								} else if ($(item).attr("alt") == "double") {
 									$(item).val(value.toFixed(2));
 								} else {
@@ -127,6 +132,7 @@
 	
 	$.fn.fill.defaults = {
 		styleElementName: 'object',	// object | none
+		dateFormat: 'mm/dd/yy',
 		debug: false,
 		elementsExecuteEvents: ['checkbox', 'radio', 'select-one']
 	};

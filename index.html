@@ -88,6 +88,7 @@
 		</style>
 
 		<script type="text/javascript">
+			$.fill.setDefaults({debug: true});
 			$(function() {
 				
 				$("#date1").datepicker({
@@ -118,7 +119,7 @@
 									{"id" : "3", "name": "Developer"}
 								]								
 					};
-					$("#form1").fill(user, {debug : true});
+					$("#form1").fill(user);
 				});
 			});
 

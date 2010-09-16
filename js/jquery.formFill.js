@@ -55,7 +55,7 @@
 								// Verificando se é um array
 								if ($(item).attr("name").match(/\[[0-9]*\]/i)) {
 									objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.').replace(/\[[0-9]*\].*/i, "");
-
+									
 									arrayAtribute = $(item).attr("name").match(/\[[0-9]*\]\.[a-z0-9]*/i) + "";
 									arrayAtribute = arrayAtribute.replace(/\[[0-9]*\]\./i, "");
 								} else {
@@ -115,7 +115,11 @@
 								case "checkbox":
 									if ($.isArray(value)) {
 										$.each(value, function(i, arrayItem) {
-											arrayItemValue = eval("arrayItem." + arrayAtribute);
+											if (typeof(arrayItem) == 'object') {											
+												arrayItemValue = eval("arrayItem." + arrayAtribute);
+											} else {
+												arrayItemValue = arrayItem;
+											}
 											if ($(item).val() == arrayItemValue) {
 												$(item).attr("checked", "checked");
 											}
@@ -126,8 +130,8 @@
 										}
 									}						
 								break;
-								executeEvents(item);
 							}
+							executeEvents(item);
 						}
 					} catch(e) {
 						if (options.debug) {

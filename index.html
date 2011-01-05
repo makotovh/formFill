@@ -62,6 +62,17 @@
 				text-align: left;
 				width: 99%;
 			}
+			
+			div.sub-session {
+				font: bold 10px verdana;
+				border-bottom: 1px solid #EFEFEF;
+				color: #444;
+				letter-spacing: .7px;
+				margin-bottom: 10px;
+				margin-top: 24px;
+				text-align: left;
+				width: 99%;
+			}
 
 			div.source {
 				background: #F8F8FF;
@@ -89,22 +100,8 @@
 
 		<script type="text/javascript">
 			$.fill.setDefaults({debug: true});
-			$(function() {
-				
-				$("#date1").datepicker({
-				       dateFormat: 'mm/dd/yy',
-				       changeMonth: true,
-				       changeYear: true
-				});
-				
-				$("#date2").datepicker({
-				       dateFormat: 'mm/dd/yy',
-				       changeMonth: true,
-				       changeYear: true
-				});
-
-			   	$("#btnExample1").click(function() {					
-					var user = {"name" : "Makoto Hashimoto",
+			
+			var user = {"name" : "Makoto Hashimoto",
 								"email" : "makoto@makoto.blog.br",
 								"phone" : {
 									"codeArea" : "+55",
@@ -118,9 +115,43 @@
 									{"id" : "1", "name": "Admin"},
 									{"id" : "3", "name": "Developer"}
 								]
-					};
+			};
+			
+			
+			$(function() {
+				
+				$("#date1").datepicker({
+				       dateFormat: 'mm/dd/yy',
+				       changeMonth: true,
+				       changeYear: true
+				});
+				
+				$("#date2").datepicker({
+				       dateFormat: 'mm/dd/yy',
+				       changeMonth: true,
+				       changeYear: true
+				});
+				
+			   	$("#btnExample1").click(function() {					
 					$("#form1").fill(user);
 				});
+				
+				$("#date11").datepicker({
+				       dateFormat: 'mm/dd/yy',
+				       changeMonth: true,
+				       changeYear: true
+				});
+				
+				$("#date22").datepicker({
+				       dateFormat: 'mm/dd/yy',
+				       changeMonth: true,
+				       changeYear: true
+				});
+				
+				$("#btnExample2").click(function() {					
+					$("#form2").fill(user, {styleElementName: 'none'});
+				});
+
 			});
 
 			var _gaq = _gaq || [];
@@ -172,6 +203,9 @@
 		</div>
 
 		<div class="session">Quick Start Guide</div>
+		<div id="fixed"></div>
+		
+		<div class="session">Using names of form elements with object syntax ("user.name"): </div>
 		<div id="fixed"></div>
 		
 		<div id="divForm1" class="description">
@@ -226,8 +260,55 @@
 		</div>
 
 		<div class="source">
-			$("#btnExample1").click(function() { <br />					
-			&nbsp;&nbsp;var user = {<br />
+			&nbsp;&nbsp;$("#form1").fill(user);
+		</div>
+		
+		
+		<div class="session">Using normal names of form elements: </div>
+		<div id="fixed"></div>
+		
+		<div id="divForm2" class="description">
+			<form id="form2">
+				<label>Nome:</label>
+				<input type="text" name="name" />
+				<br /><br />
+				
+				<label>E-mail:</label>
+				<input type="text" name="email" />
+				<br /><br />
+							
+				<label>Date:</label>
+				<input type="text" name="date1" id="date11" /> from string (mm/dd/yyyy, mm-dd-yyyy, yyyy-mm-dd or yyyy/mm/dd)
+				<br /><br />
+				
+				<label>Date 2:</label>
+				<input type="text" name="date2" id="date22"/> from milliseconds
+				<br /><br />
+				
+				<label>Gender:</label>
+				<select name="gender">
+					<option>--select--</option>
+					<option value="F">Female</option>
+					<option value="M">Male</option>
+				</select>
+				<br /><br />
+				
+				<input type="button" id="btnExample2" value="Fill" />
+				<input type="reset" value="Reset" />
+			</form>
+			
+		</div>
+		
+		<div class="source">
+			&nbsp;&nbsp;$("#form2").fill(user, {styleElementName:'none'});
+		</div>
+
+		<div class="sub-session">
+			JSON used:
+		</div>
+		<div class="source">
+
+			&nbsp;&nbsp;user = {<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"name" : "Makoto Hashimoto",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"email" : "makoto@makoto.blog.br",<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;"phone" : {<br />
@@ -243,7 +324,58 @@
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{"id" : "3", "name": "Developer"}<br />
 			&nbsp;&nbsp;&nbsp;&nbsp;]<br />
 			&nbsp;&nbsp;};<br />
-			&nbsp;&nbsp;$("#form1").fill(user);<br />
-				});
+		</div>
+		
+		<div class="session">
+			Options:
+		</div>
+		
+		<div class="sub-session">
+			styleElementName
+		</div>
+		
+		<div class="description">
+			<ul>
+				<li><b>'object'</b> : when the names of form elements looks like a objects 'user.name'. (Default)</li>
+				<li><b>'none'</b> : when the names of form are normal</li>
+			</ul>
+		</div>
+		
+		<div class="sub-session">
+			dateFormat
+		</div>
+		
+		<div class="description">
+			You can inform what date format come from json.
+			<br />
+			Examples:
+			<ul>
+				<li><b>'mm/dd/yy'</b> : USA date format (Default)</li>
+				<li><b>'dd/mm/yy'</b> : Brazilian date format</li>
+			</ul>
+		</div>
+		
+		<div class="sub-session">
+			debug
+		</div>
+		
+		<div class="description">		
+			<ul>
+				<li><b>true</b> : Turn on the debug mode</li>
+				<li><b>false</b> : Turno off the debug mode (Default)</li>
+			</ul>
+		</div>
+		
+		<div class="sub-session">
+			elementsExecuteEvents
+		</div>
+		
+		<div class="description">
+			You can inform each element type you want execute the methods of events onclick or onchange.
+			<br />
+			Examples:
+			<ul>
+				<li><b>['checkbox', 'radio', 'select-one']</b> : Default</li>
+			</ul>
 		</div>
 </html>

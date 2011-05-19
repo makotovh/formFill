@@ -52,7 +52,7 @@
 						try {
 
 							if (options.styleElementName == "object") {
-								// Verificando se é um array
+								// Verificando se ¿ um array
 								if ($(item).attr("name").match(/\[[0-9]*\]/i)) {
 									objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.').replace(/\[[0-9]*\].*/i, "");
 									
@@ -74,13 +74,12 @@
 						}					
 
 						if (value != null) {
-							switch ($(item).attr("type")) {
+							if ($(item).is("select") || $(item).is("textarea")) {
+								$(item).val(value);
+							} else if ($(item).is("input")) {
+								switch ($(item).attr("type")) {
 								case "hidden":
 								case "password":
-								case "textarea":
-									$(item).val(value);
-								break;
-
 								case "text":
 									if ($(item).hasClass("hasDatepicker")) {
 										var re = /^[-+]*[0-9]*$/;
@@ -98,20 +97,14 @@
 									} else {
 										$(item).val(value);
 									}
-								break;
-
-								case "select-one":
-									if (value) {
-										$(item).val(value);
-									}
-								break;
+									break;
 								case "radio":
 									$(item).each(function (i, radio) {
 										if ($(radio).val() == value) {
 											$(radio).attr("checked", "checked");
 										}
 									});
-								break;
+									break;
 								case "checkbox":
 									if ($.isArray(value)) {
 										$.each(value, function(i, arrayItem) {
@@ -129,7 +122,9 @@
 											$(item).attr("checked", "checked");
 										}
 									}						
-								break;
+									break;
+								}
+								
 							}
 							executeEvents(item);
 						}
@@ -138,9 +133,7 @@
 							debug(e.message);
 						}
 					}
-
 				}
-
 			});
 		}
 	});
@@ -170,3 +163,4 @@
         }
     };
 })(jQuery);
+

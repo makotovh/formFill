@@ -46,18 +46,26 @@
 
 			_element.find("*").each(function(i, item){
 				if ($(item).is("input") || $(item).is("select") || $(item).is("textarea")) {
+					debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
 					try {
 						var objName;
 						var arrayAtribute;
+						var isArray = false;
+						var value = null;
+						var valueArray = null;
 						try {
 
 							if (options.styleElementName == "object") {
 								// Verificando se ¿ um array
 								if ($(item).attr("name").match(/\[[0-9]*\]/i)) {
-									objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.').replace(/\[[0-9]*\].*/i, "");
+									objNameArray = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.').replace(/\[[0-9]*\].*/i, "");
 									
 									arrayAtribute = $(item).attr("name").match(/\[[0-9]*\]\.[a-z0-9]*/i) + "";
 									arrayAtribute = arrayAtribute.replace(/\[[0-9]*\]\./i, "");
+
+									objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.');
+									isArray = true;
+									valueArray = eval(objNameArray);
 								} else {
 									objName = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.');
 								}
@@ -65,12 +73,22 @@
 								objName = 'obj.' + $(item).attr("name");
 							}
 
-							var value = eval(objName);
-
-						} catch(e) {
-							if (options.debug) {
-								debug(e.message);
+							if ($(item).attr("type") == "checkbox") {
+								value = true;
+								debug("Item is a checkbox");
+							} else {
+								value = eval(objName);
 							}
+
+							debug("object name: " + objName);
+							debug("object value: " + value);
+							if (isArray) {
+								debug("is Array");
+								debug("array name: " + objNameArray);
+								debug("array value: " + valueArray);
+							}
+						} catch(e) {
+							debug("Error: " + e.message);
 						}					
 
 						if (value != null) {
@@ -106,17 +124,19 @@
 									});
 									break;
 								case "checkbox":
-									if ($.isArray(value)) {
-										$.each(value, function(i, arrayItem) {
-											if (typeof(arrayItem) == 'object') {											
+									if (isArray) {
+										$.each(valueArray, function(i, arrayItem) {
+											if (typeof(arrayItem) == 'object') {
 												arrayItemValue = eval("arrayItem." + arrayAtribute);
 											} else {
 												arrayItemValue = arrayItem;
 											}
+											
 											if ($(item).val() == arrayItemValue) {
 												$(item).attr("checked", "checked");
 											}
-										}); 
+										});
+
 									} else {
 										if ($(item).val() == value) {
 											$(item).attr("checked", "checked");
@@ -129,9 +149,7 @@
 							executeEvents(item);
 						}
 					} catch(e) {
-						if (options.debug) {
-							debug(e.message);
-						}
+						debug(e.message);
 					}
 				}
 			});
@@ -158,9 +176,9 @@
 	};
 	
 	function debug(message) {                                                                                            // Throws error messages in the browser console.
-        if (window.console && window.console.log) {
-            window.console.log(message);
-        }
-    };
+        	if (window.console && window.console.log && options.debug) {
+           		 window.console.log(message);
+        	}
+    	};
 })(jQuery);
 

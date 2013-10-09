@@ -8,7 +8,7 @@
  * @since       16.06.2010
  * @author      Makoto Hashimoto
  * @link        http://makoto.blog.br/formFill
- * @twitter     http://twitter.com/makoto_vix
+ * @twitter     http://twitter.com/makotovh
  * @license     http://www.opensource.org/licenses/mit-license.php MIT 
  * @package     jQuery Plugins
  * 
@@ -118,7 +118,7 @@
 									break;
 								case "radio":
 									$(item).each(function (i, radio) {
-										if ($(radio).val() == value) {
+										if (String($(radio).val()) == String(value)) {
 											$(radio).attr("checked", "checked");
 										}
 									});
@@ -132,13 +132,13 @@
 												arrayItemValue = arrayItem;
 											}
 											
-											if ($(item).val() == arrayItemValue) {
+											if (String($(item).val()) == String(arrayItemValue)) {
 												$(item).attr("checked", "checked");
 											}
 										});
 
 									} else {
-										if ($(item).val() == value) {
+										if (String($(item).val()) == String(value)) {
 											$(item).attr("checked", "checked");
 										}
 									}						
@@ -174,11 +174,12 @@
 			}
 		}	
 	};
-	
-	function debug(message) {                                                                                            // Throws error messages in the browser console.
-        	if (window.console && window.console.log && options.debug) {
-           		 window.console.log(message);
-        	}
-    	};
+
+	// Throws error messages in the browser console.
+	function debug(message) {
+		if (window.console && window.console.log && options.debug) {
+			window.console.log(message);
+		}
+	};
 })(jQuery);
 

@@ -56,7 +56,7 @@
 						try {
 
 							if (options.styleElementName == "object") {
-								// Verificando se ¿ um array
+								// Verificando se Ã© um array
 								if ($(item).attr("name").match(/\[[0-9]*\]/i)) {
 									objNameArray = $(item).attr("name").replace(/^[a-z]*[0-9]*[a-z]*\./i, 'obj.').replace(/\[[0-9]*\].*/i, "");
 									
@@ -73,12 +73,7 @@
 								objName = 'obj.' + $(item).attr("name");
 							}
 
-							if ($(item).attr("type") == "checkbox") {
-								value = true;
-								debug("Item is a checkbox");
-							} else {
-								value = eval(objName);
-							}
+							value = eval(objName);
 
 							debug("object name: " + objName);
 							debug("object value: " + value);
